@@ -33,10 +33,9 @@ public class ForwardServlet extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/forward.jsp");
-		
+
 		dispatcher.forward(request, response);
-			
-		
+
 	}
 
 	/**
