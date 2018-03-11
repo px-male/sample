@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.RegisterUserLogic;
 import model.User;
 
 /**
@@ -43,8 +44,8 @@ public class RegisterUser extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
 			RegisterUserLogic registerUserLogic = new RegisterUserLogic();
-			registerUserLogic.execute(user);
-
+			boolean result = registerUserLogic.execute(user);
+			session.removeAttribute("user");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerDone.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -56,6 +57,8 @@ public class RegisterUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");

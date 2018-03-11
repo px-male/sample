@@ -1,8 +1,6 @@
-package servlet;
+package model;
 
 import java.io.Serializable;
-
-import model.User;
 
 public class RegisterUserLogic implements Serializable {
 
@@ -10,8 +8,8 @@ public class RegisterUserLogic implements Serializable {
 		
 	}
 	
-	public void execute(User user) {
-		
+	public boolean execute(User user) {
+		return true;
 	}
 	
 }
