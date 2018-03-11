@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import model.Health;
 import model.HealthCheckLogic;
 
 /**
- * Servlet implementation class HealthCheck
+ * Servlet implementation class HealthCheck !!
  */
 @WebServlet("/HealthCheck")
 public class HealthCheck extends HttpServlet {
@@ -35,9 +36,9 @@ public class HealthCheck extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		System.out.println("hello!");
 		RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/jsp/healthCheck.jsp");
 		dispacher.forward(request, response);
-		
 	}
 
 	/**
@@ -50,17 +51,20 @@ public class HealthCheck extends HttpServlet {
 		
 		
 		String height = request.getParameter("height");
-		
-		System.out.println(height);
-
-		
-		
-		
-		double double_height = Double.parseDouble(height);
-		
 		String weight = request.getParameter("weight");
-
+		
+		// 空文字かどうか確認して、空文字ならエラー表示する。
+		if (height.isEmpty() || weight.isEmpty()) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("身長と体重を入力して下さい。");
+		}
+		double double_height = Double.parseDouble(height);
 		double double_weight = Double.parseDouble(weight);
+		
+		
+		
+		
 		
 		HealthCheckLogic hcLogic = new HealthCheckLogic();
 
@@ -82,6 +86,7 @@ public class HealthCheck extends HttpServlet {
 		health.setBmi(bmi);
 		health.setBodytype(bodyType);
 		
+		//リクエストスコープに保存
 		request.setAttribute("health", health);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/healthCheckResult.jsp");
