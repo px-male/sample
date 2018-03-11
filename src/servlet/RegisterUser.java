@@ -16,14 +16,14 @@ import model.User;
 /**
  * Servlet implementation class RegistUser
  */
-@WebServlet("/RegistUser")
-public class RegistUser extends HttpServlet {
+@WebServlet("/RegisterUser")
+public class RegisterUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistUser() {
+    public RegisterUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,17 +36,17 @@ public class RegistUser extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		if (action == "done") {
+		if (action == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerForm.jsp");
+			dispatcher.forward(request, response);			
+		} else if (action.equals("done")) {
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
 			RegisterUserLogic registerUserLogic = new RegisterUserLogic();
-			registerUserLogic.execute();
-			RequestDispatcher dispature = request.getRequestDispatcher("/WEB-INF/jsp/registerDone.jsp");
-			
-			
-		} else if (action == null) {
-			RequestDispatcher dispature = request.getRequestDispatcher("/WEB-INF/jsp/registerForm.jsp");
-			dispature.forward(request, response);			
+			registerUserLogic.execute(user);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerDone.jsp");
+			dispatcher.forward(request, response);
 		}
 		
 	}
@@ -71,7 +71,7 @@ public class RegistUser extends HttpServlet {
 		session.setAttribute("user", user);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerConfirm.jsp");
-		
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -17,8 +17,8 @@ User user = (User)session.getAttribute("user");
 ログイン名:<%=user.getId() %><br>
 名前：<%=user.getName() %><br>
 </p>
-<a href="/example/RegistUser">戻る</a>
-<a href="/example/RegistUser?actions="done">登録</a>
+<a href="/example/RegisterUser">戻る</a>
+<a href="/example/RegisterUser?action=done">登録</a>
 
 </body>
 </html>
