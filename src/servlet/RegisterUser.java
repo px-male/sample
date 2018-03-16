@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.SessionCookieConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +44,9 @@ public class RegisterUser extends HttpServlet {
 			User user = (User)session.getAttribute("user");
 			RegisterUserLogic registerUserLogic = new RegisterUserLogic();
 			boolean result = registerUserLogic.execute(user);
+			
 			session.removeAttribute("user");
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerDone.jsp");
 			dispatcher.forward(request, response);
 		}

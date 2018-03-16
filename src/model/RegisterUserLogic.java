@@ -1,11 +1,15 @@
 package model;
 
-import java.io.Serializable;
+public class RegisterUserLogic {
 
-public class RegisterUserLogic implements Serializable {
+	User user;
 
-	public RegisterUserLogic() {
+	public RegisterUserLogic(){
 		
+	}
+	
+	public RegisterUserLogic(User user) {
+		this.user = user;
 	}
 	
 	public boolean execute(User user) {
