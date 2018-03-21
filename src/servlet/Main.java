@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Mutter;
+import model.PostMutterLogic;
 import model.User;
 
 /**
@@ -63,8 +64,42 @@ public class Main extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		// formのパラメータ取得
+		request.setCharacterEncoding("UTF-8");
+		
+		String text = request.getParameter("mutter");
+
+		if (!text.isEmpty()) {
+
+			// Sessionスコープからパラメータ取得
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+
+			// アプリケーションスコープからパラメータ取得
+			ServletContext application = this.getServletContext();
+			List<Mutter> list = (List<Mutter>)application.getAttribute("tsubuList");
+		
+			// Mutterインスタンス作成
+			Mutter mutter = new Mutter();
+			mutter.setName(user.getName());
+			mutter.setString(text);
+		
+			// つぶやきをリストに追加
+			PostMutterLogic postmutterlogic = new PostMutterLogic();
+			postmutterlogic.execute(mutter, list);		
+			
+			// applicationスコープにlistを追加
+			application.setAttribute("tsubuList", list);
+		} else {
+			String error = "呟きが入力されていません。";
+			request.setAttribute("error", error);
+		}
+		
+		// どこつぶの表示
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }
