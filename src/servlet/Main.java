@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.GetMutterLogic;
 import model.Mutter;
 import model.PostMutterLogic;
 import model.User;
@@ -38,15 +39,11 @@ public class Main extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		ServletContext application = this.getServletContext();
 
-		List<Mutter> tsubuList = (List<Mutter>) application.getAttribute("tsubuList");
-		
-		if (tsubuList == null) {
-			tsubuList = new ArrayList<Mutter>();
-			application.setAttribute("tsubuList", tsubuList);
-			
-		}
+		GetMutterLogic getMutterLogic = new GetMutterLogic();
+
+		List<Mutter> tsubuList = getMutterLogic.execute();
+				
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -76,10 +73,7 @@ public class Main extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
 
-			// アプリケーションスコープからパラメータ取得
-			ServletContext application = this.getServletContext();
-			List<Mutter> list = (List<Mutter>)application.getAttribute("tsubuList");
-		
+			
 			// Mutterインスタンス作成
 			Mutter mutter = new Mutter();
 			mutter.setName(user.getName());
@@ -87,10 +81,8 @@ public class Main extends HttpServlet {
 		
 			// つぶやきをリストに追加
 			PostMutterLogic postmutterlogic = new PostMutterLogic();
-			postmutterlogic.execute(mutter, list);		
+			postmutterlogic.execute(mutter);		
 			
-			// applicationスコープにlistを追加
-			application.setAttribute("tsubuList", list);
 		} else {
 			String error = "呟きが入力されていません。";
 			request.setAttribute("error", error);

@@ -2,9 +2,13 @@ package model;
 
 import java.util.List;
 
+import dao.MutterDAO;
+
 public class PostMutterLogic {
 	
-	public void execute(Mutter mutter, List<Mutter> list) {
-		list.add(0, mutter);
+	public void execute(Mutter mutter) {
+	
+		MutterDAO mutterDao = new MutterDAO();
+		mutterDao.create(mutter);
 	}
 }
