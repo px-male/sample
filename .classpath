@@ -22,5 +22,6 @@
 			<attribute name="javadoc_location" value="http://mergedoc.osdn.jp/tomcat-servletapi-5-ja/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
