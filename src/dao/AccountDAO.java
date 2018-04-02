@@ -6,10 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import model.Account;
 import model.Login;
 
 public class AccountDAO {
+	
+	
+	private Logger logger = LogManager.getLogger();
 	
 	public Account findByLogin(Login login) {
 		
@@ -49,7 +55,11 @@ public class AccountDAO {
 				int t_age = rs.getInt("age");
 			
 				account = new Account(t_user_id, t_pass, t_mail, t_name, t_age);
+			} else {
+				logger.debug("検索結果　なし");
 			}
+			
+			
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

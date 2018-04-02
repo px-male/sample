@@ -17,11 +17,26 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Library/Java/apache-tomcat-8.0.36/lib/servlet-api.jar" sourcepath="/Library/Java/apache-tomcat-8.0.36/apache-tomcat-8.0.36-src.zip">
+	<classpathentry kind="lib" path="C:/Program Files/pleiades/tomcat/8/lib/tomcat-jni.jar" sourcepath="/Library/Java/apache-tomcat-8.0.36/apache-tomcat-8.0.36-src.zip">
 		<attributes>
 			<attribute name="javadoc_location" value="http://mergedoc.osdn.jp/tomcat-servletapi-5-ja/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/ICF_AutoCapsule_disabled/workspace/example/log4j/log4j-api-2.11.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/ICF_AutoCapsule_disabled/workspace/example/log4j/log4j-core-2.11.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="log4j">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/classes"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
